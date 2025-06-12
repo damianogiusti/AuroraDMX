@@ -46,7 +46,7 @@ public class AuroraNetwork {
             SACN.scheduleAtFixedRate(new SendSacnUpdate(activity, clientSocket), 200, 100);
         } else {
             ArtNet = new Timer();
-            ArtNet.scheduleAtFixedRate(new SendArtnetUpdate(activity, clientSocket), 200, 100);
+            ArtNet.scheduleAtFixedRate(new SendArtnetUpdate(activity, clientSocket), 200, 50);
         }
 
     }
