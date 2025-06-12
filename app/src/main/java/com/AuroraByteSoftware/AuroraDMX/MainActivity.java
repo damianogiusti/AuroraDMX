@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.AuroraByteSoftware.AuroraDMX.billing.Billing;
 import com.AuroraByteSoftware.AuroraDMX.chase.ChaseObj;
 import com.AuroraByteSoftware.AuroraDMX.fixture.Fixture;
 import com.AuroraByteSoftware.AuroraDMX.fixture.RGBFixture;
@@ -44,8 +43,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     static Double cueCount = 1.0;// cueCount++ = new cue num
     private static boolean updatingFixtures = false;
     private int orgColor = 0;
-
-    public Billing billing = new Billing();
 
     public static final ArrayList<ArtPollReply> foundServers = new ArrayList<>();
     public static ProgressDialog progressDialog = null;
@@ -82,7 +79,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         super.onCreate(savedInstanceState);
         pm = new ProjectManagement(this);
         Log.v(getClass().getSimpleName(), "onCreate");
-        billing.setup(this);
         Iconify.with(new FontAwesomeModule());
         startup();
         Intent intent = getIntent();
@@ -141,30 +137,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     void setNumberOfFixtures(int numberFixtures, String[] channelNames, boolean[] isRGB,
                              String[] valuePresets, Boolean[] isParked) {
         updatingFixtures = true;
-        // check for app purchase
-        boolean paid = true;
-        // Skip the paid check when developing
-        try {
-            paid = billing.check();
-        } catch (IllegalStateException | NullPointerException e) {
-            // Do nothing we must not be connected yet
-            e.printStackTrace();
-        }
-        if (BuildConfig.DEBUG) {
-            paid = true;
-        }
-
-        // Input cleansing
-        if (numberFixtures > MAX_CHANNEL) {
-            Toast.makeText(MainActivity.this, R.string.dmxRangeError, Toast.LENGTH_SHORT).show();
-            numberFixtures = MAX_CHANNEL;
-        } else if (numberFixtures < 1) {
-            Toast.makeText(MainActivity.this, R.string.dmxRangeError, Toast.LENGTH_SHORT).show();
-            numberFixtures = 1;
-        } else if (numberFixtures > 5 && !paid) {
-            Toast.makeText(MainActivity.this, R.string.dmxRangePurchaseLimit, Toast.LENGTH_SHORT).show();
-            numberFixtures = 5;
-        }
 
         int change = numberFixtures - alColumns.size();
         int numOfChannelsUsed = 0;//use calculateChannelCount() ?

@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.AuroraByteSoftware.AuroraDMX.billing.Billing;
 import com.AuroraByteSoftware.AuroraDMX.network.SendArtnetPoll;
 import com.AuroraByteSoftware.AuroraDMX.ui.ManualServerIP;
 import com.AuroraByteSoftware.AuroraDMX.ui.fontawesome.FontAwesomeIcons;
@@ -58,7 +57,6 @@ public class SettingsActivity extends PreferenceActivity {
     public static final String restoredefaults = "restoredefaults";
     private static Thread t;
     private static SettingsActivity settings;
-    private static final Billing billing = new Billing();
 
     /**
      * {@inheritDoc}
@@ -131,7 +129,6 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            billing.setup(getActivity());
             addPreferencesFromResource(R.xml.pref_general);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -153,7 +150,6 @@ public class SettingsActivity extends PreferenceActivity {
                 public boolean onPreferenceClick(Preference preference) {
                     //open browser or intent here
                     Log.i(getClass().getSimpleName(), "unlock_channels");
-                    billing.requestPurchase(settings);
 
                     return true;
                 }
