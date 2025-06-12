@@ -1,0 +1,3 @@
+[submodule "ArtNetStack"]
+	path = ArtNetStack
+	url = git@github.com:dfredell/ArtNetStack.git
