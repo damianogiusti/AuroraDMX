@@ -55,8 +55,8 @@ object AuroraNetwork : CoroutineScope by CoroutineScope(SupervisorJob() + Dispat
                 SACNUnicast = launch {
                     delay(200)
                     while (currentCoroutineContext().isActive) {
-                        delay(100)
                         SendSacnUpdate(activity, clientSocket).run()
+                        delay(100)
                     }
                 }
             }
@@ -64,8 +64,8 @@ object AuroraNetwork : CoroutineScope by CoroutineScope(SupervisorJob() + Dispat
                 SACN = launch {
                     delay(200)
                     while (currentCoroutineContext().isActive) {
-                        delay(100)
                         SendSacnUpdate(activity, clientSocket).run()
+                        delay(100)
                     }
                 }
             }
@@ -73,8 +73,8 @@ object AuroraNetwork : CoroutineScope by CoroutineScope(SupervisorJob() + Dispat
                 ArtNet = launch {
                     delay(200)
                     while (currentCoroutineContext().isActive) {
-                        delay(25)
                         SendArtnetUpdate(activity, clientSocket).run()
+                        delay(25)
                     }
                 }
             }
