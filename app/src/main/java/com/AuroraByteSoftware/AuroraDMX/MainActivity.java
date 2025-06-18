@@ -2,6 +2,7 @@ package com.AuroraByteSoftware.AuroraDMX;
 
 import static com.AuroraByteSoftware.AuroraDMX.ui.fontawesome.FontAwesomeManager.addFAIcon;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -132,7 +133,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     public static SharedPreferences getSharedPref() {
         return sharedPref;
     }
-
 
     void setNumberOfFixtures(int numberFixtures, String[] channelNames, boolean[] isRGB,
                              String[] valuePresets, Boolean[] isParked) {
@@ -350,6 +350,18 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         pm.refreshCueView();
 
         AuroraNetwork.setUpNetwork(this);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            String serverAddress;
+            String manualServer = getSharedPref().getString(SettingsActivity.manualserver, "");
+            if (manualServer.isEmpty()) {
+                serverAddress = "Detected Server: " + getSharedPref().getString(SettingsActivity.serveraddress, "");
+            } else {
+                serverAddress = "Manual Server: " + manualServer;
+            }
+            actionBar.setSubtitle(serverAddress);
+        }
     }
 
     @Override
