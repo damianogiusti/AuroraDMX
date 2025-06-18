@@ -43,4 +43,9 @@ public class ChaseButton extends RelativeLayout {
     public ProgressBar getProgressBar() {
         return progressBar;
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    }
 }
