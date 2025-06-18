@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace "com.AuroraByteSoftware.AuroraDMX"
     signingConfigs {
     }
-    compileSdkVersion 34
+    compileSdk = 34
     defaultConfig {
         applicationId "com.AuroraByteSoftware.AuroraDMX"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk = 21
+        targetSdk = 34
         versionCode 66
         versionName '4.7.0'
     }
@@ -42,7 +43,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     namespace 'com.AuroraByteSoftware.AuroraDMX'
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -52,6 +58,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'androidx.annotation:annotation:1.7.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
 
     testImplementation 'junit:junit:4.13.2'
     // Required for instrumented tests
