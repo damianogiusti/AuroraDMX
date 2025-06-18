@@ -72,6 +72,7 @@
     <string name="pref_header_general">General</string>
     <string name="channel_color_title">Channel Color</string>
     <string name="default_fade">Default cue fade time (sec)</string>
+    <string name="default_packet_send_interval">Default update packet send interval (ms)</string>
     <string name="number_of_channels">Number of fixtures</string>
     <string name="default_chaseFade">Default fade time on a chase</string>
     <string name="default_chaseWait">Default time for a cue to stay on in a chase</string>
@@ -81,6 +82,7 @@
     <string name="pref_default_fade_time">5</string>
     <string name="pref_default_channels">20</string>
     <string name="pref_sacn_universe_def">1</string>
+    <string name="pref_default_packet_send_interval_ms">25</string>
     <string name="editLevel">Level</string>
 
     <!-- dialog_column -->

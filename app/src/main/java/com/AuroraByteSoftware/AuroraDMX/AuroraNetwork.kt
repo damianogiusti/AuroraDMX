@@ -46,35 +46,36 @@ object AuroraNetwork : CoroutineScope by CoroutineScope(SupervisorJob() + Dispat
     fun setUpNetwork(activity: Activity?) {
         val sharedPref = MainActivity.getSharedPref() ?: return
 
+        val updatePacketIntervalMs = sharedPref.getString("packet_send_interval", null)?.toLongOrNull() ?: 25
         val protocol = sharedPref.getString("select_protocol", null)
-        Log.i("AuroraNetwork", "Starting Network $protocol")
+        Log.i("AuroraNetwork", "Starting Network $protocol with interval ${updatePacketIntervalMs}ms")
         stopNetwork()
 
         when (protocol) {
             "SACNUNI" -> {
                 SACNUnicast = launch {
                     delay(200)
-                    while (currentCoroutineContext().isActive) {
+                    while (isActive) {
                         SendSacnUpdate(activity, clientSocket).run()
-                        delay(100)
+                        delay(updatePacketIntervalMs)
                     }
                 }
             }
             "SACN" -> {
                 SACN = launch {
                     delay(200)
-                    while (currentCoroutineContext().isActive) {
+                    while (isActive) {
                         SendSacnUpdate(activity, clientSocket).run()
-                        delay(100)
+                        delay(updatePacketIntervalMs)
                     }
                 }
             }
             else -> {
                 ArtNet = launch {
                     delay(200)
-                    while (currentCoroutineContext().isActive) {
+                    while (isActive) {
                         SendArtnetUpdate(activity, clientSocket).run()
-                        delay(25)
+                        delay(updatePacketIntervalMs)
                     }
                 }
             }

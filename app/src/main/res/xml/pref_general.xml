@@ -39,6 +39,15 @@
         android:singleLine="true"
         android:title="@string/default_chaseWait"
         android:maxLength="3"/>
+    <EditTextPreference
+        android:defaultValue="@string/pref_default_packet_send_interval_ms"
+        android:inputType="number"
+        android:key="packet_send_interval"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/default_packet_send_interval"
+        android:maxLength="4"/>
     <!--
          NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it.

@@ -146,6 +146,7 @@ public class SettingsActivity extends PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference(channels));
             bindPreferenceSummaryToValue(findPreference("chase_fade_time"));
             bindPreferenceSummaryToValue(findPreference("chase_wait_time"));
+            bindPreferenceSummaryToValue(findPreference("packet_send_interval"));
 
 
             // The content view embeds two fragments; now retrieve them and attach
