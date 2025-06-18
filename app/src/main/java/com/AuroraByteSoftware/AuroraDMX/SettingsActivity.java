@@ -56,8 +56,6 @@ public class SettingsActivity extends PreferenceActivity {
     public static final String serveraddress = "serveraddress";
     public static final String restoredefaults = "restoredefaults";
     private static Thread t;
-    private static SettingsActivity settings;
-
     /**
      * {@inheritDoc}
      */
@@ -71,7 +69,6 @@ public class SettingsActivity extends PreferenceActivity {
         } else {
             loadHeadersFromResource(R.xml.pref_headers_artnet, target);
         }
-        settings = this;
     }
 
     /**
@@ -126,6 +123,15 @@ public class SettingsActivity extends PreferenceActivity {
      * activity is showing a two-pane settings UI.
      */
     public static class GeneralPreferenceFragment extends PreferenceFragment {
+
+        private SettingsActivity settingsActivity;
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            settingsActivity = (SettingsActivity) context;
+        }
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -158,7 +164,7 @@ public class SettingsActivity extends PreferenceActivity {
             findPreference("select_protocol").setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    settings.invalidateHeaders();//loads the header with only one protocol
+                    settingsActivity.invalidateHeaders();//loads the header with only one protocol
                     return true;
                 }
             });
